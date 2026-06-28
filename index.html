@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 1 Web & Internet Fundamentals Notes</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --text: #172033;
+      --muted: #5f6b7a;
+      --border: #dbe2ef;
+      --accent: #2563eb;
+      --accent-dark: #1e40af;
+      --code-bg: #0f172a;
+      --code-text: #e5e7eb;
+      --table-head: #eef4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #fff;
+      padding: 26px 18px;
+      border-bottom: 5px solid var(--accent);
+    }
+    .wrap, main {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    header h1 {
+      margin: 0;
+      color: #fff;
+      font-size: 30px;
+      line-height: 1.25;
+    }
+    header p {
+      margin: 8px 0 0;
+      color: #dbeafe;
+      font-size: 16px;
+    }
+    main {
+      padding: 24px 16px 48px;
+    }
+    article {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+    }
+    h1, h2, h3 {
+      color: #111827;
+      line-height: 1.25;
+    }
+    article > h1:first-child { margin-top: 0; }
+    h1 {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 12px;
+      margin-top: 36px;
+    }
+    h2 {
+      margin-top: 30px;
+      color: var(--accent-dark);
+    }
+    h3 { margin-top: 22px; }
+    p, li { font-size: 16px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      display: block;
+      overflow-x: auto;
+      margin: 18px 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--table-head); }
+    code {
+      background: #edf2f7;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: Consolas, Monaco, monospace;
+    }
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+    }
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+    .loading, .error {
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .error { color: #b91c1c; }
+    @media (max-width: 760px) {
+      header h1 { font-size: 23px; }
+      article { padding: 18px; }
+      main { padding: 16px 10px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Module 1: Web & Internet Fundamentals</h1>
+      <p>Simple Hinglish notes with real-world examples, code explanation, project flow, and viva questions.</p>
+    </div>
+  </header>
+  <main>
+    <article id="content">
+      <p class="loading">Loading notes...</p>
+    </article>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    const content = document.getElementById("content");
+
+    fetch("README.md", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("README.md file could not be loaded.");
+        }
+        return response.text();
+      })
+      .then((markdown) => {
+        content.innerHTML = marked.parse(markdown);
+      })
+      .catch((error) => {
+        content.innerHTML = `<h1>Notes could not be loaded</h1><p class="error">${error.message}</p>`;
+      });
+  </script>
+</body>
+</html>
